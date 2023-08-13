@@ -18,6 +18,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
 def send_email(sender_email, app_password, recipient_email, subject, body):
     msg = MIMEMultipart()
     msg["From"] = sender_email
@@ -30,9 +34,6 @@ def send_email(sender_email, app_password, recipient_email, subject, body):
     server.login(sender_email, app_password)
     server.sendmail(sender_email, recipient_email, msg.as_string())
     server.quit()
-
-    print("Email sent successfully.")
-    print("Emails sent: ", email_cache.get(datetime.now().replace(minute=0, second=0, microsecond=0))['count'])
     
 @app.route('/submit', methods=['POST'])
 def submit_alert():
