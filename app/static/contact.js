@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!input.validity.valid) {
         isValid = false;
       }
+      // For email field
     });
 
     submitButton.disabled = !isValid;
@@ -54,16 +55,32 @@ document
           for (child of form.children) {
             // If the element does not have .greeting class, hide it
             if (
-              !child.classList.contains("greeting") &&
+              !child.classList.contains("greeting-wrapper") &&
               !child.classList.contains("submit-button")
             ) {
               child.style.display = "none";
             }
           }
-          document.querySelector(".greeting").innerHTML =
-            "Server Busy! Please wait " +
-            String(Math.floor(remaining / 60)) +
-            " minutes before sending another message";
+          greeting = document.querySelector(".greeting");
+          greeting.style.width = "66ch";
+          greeting.style.height = "auto";
+          greeting.style.fontSize = "2rem";
+          greeting.innerHTML = "";
+          greeting.style.animation = "none";
+          setTimeout(() => {
+            if (parseInt(remaining) < 60) {
+              document.querySelector(".greeting").innerHTML =
+                "Server Busy! Please wait " +
+                String(remaining) +
+                " seconds before sending another message.";
+            } else
+              document.querySelector(".greeting").innerHTML =
+                "Server Busy! Please wait " +
+                String(Math.floor(remaining / 60)) +
+                " minutes before sending another message.";
+            greeting.style.animation =
+              "typing 3s steps(100), blink 0.5s step-end infinite alternate";
+          }, 100);
         } else {
           // submission failure, throw error
           throw new Error(data.error);
@@ -81,12 +98,21 @@ function success() {
   // Hide the form elements
   for (child of form.children) {
     // If the element does not have .greeting class, hide it
-    if (!child.classList.contains("greeting")) {
+    if (!child.classList.contains("greeting-wrapper")) {
       child.style.display = "none";
     }
   }
   // Modify the greeting element
   const greeting = document.querySelector(".greeting");
-  greeting.children[0].innerHTML = "Thank you for your message!";
+  greeting.style.width = "27ch";
+  greeting.style.height = "auto";
   greeting.style.fontSize = "3rem";
+  greeting.innerHTML = "";
+  greeting.style.animation = "none";
+
+  setTimeout(() => {
+    greeting.innerHTML = "Thank you for your message!";
+    greeting.style.animation =
+      "typing 2s steps(100), blink 0.5s step-end infinite alternate";
+  }, 100);
 }

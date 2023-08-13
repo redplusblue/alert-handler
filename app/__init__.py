@@ -54,6 +54,7 @@ def send_email(sender_email, app_password, recipient_email, subject, body):
 # Route to submit contact form 
 @app.route('/submit', methods=['POST'])
 def submit_alert():
+    
     # Get form data
     name = str(request.form.get('name'))
     subject = str(request.form.get('subject'))
@@ -90,6 +91,7 @@ def submit_alert():
         response = {'status': 'success'}
         
     else: 
+        print("Email credentials not found.")
         response = {'status': 'error'}
         
     return jsonify(response)
