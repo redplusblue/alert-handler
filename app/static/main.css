@@ -1,0 +1,38 @@
+/* for the home page */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container {
+  height: fit-content;
+  width: max-content;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: grid;
+  place-items: center;
+  justify-content: center;
+}
+.message,
+.message1 {
+  height: fit-content;
+  color: white;
+  width: 48ch;
+  border-right: 3px solid;
+  font-family: monospace;
+  font-size: 2rem;
+  animation: typing 1s steps(100), blink 0.5s step-end infinite alternate;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.message1 {
+  border-right: none;
+  animation: typing 2s steps(100), blink 0.5s step-end;
+  text-align: center;
+}
