@@ -1,10 +1,21 @@
 # app/__init__.py
-from flask import Flask, jsonify, render_template, request
-from flask import Flask, render_template, request
+from flask import Flask, jsonify, render_template, request, redirect
 from app.utils.contact import validate_email
 
 # app refers to the Flask object created by this file 
 app = Flask(__name__)
+
+# Redirect to https 
+@app.before_request
+def before_request():
+    if app.env == "development":
+        return
+    if request.is_secure:
+        return
+
+    url = request.url.replace("http://", "https://", 1)
+    code = 301
+    return redirect(url, code=code)
 
 # Route to home page
 @app.route('/')
