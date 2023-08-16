@@ -1,5 +1,6 @@
-const form = document.querySelector("form");
 // static/script.js
+const form = document.querySelector("form");
+// Validate the form on input change
 document.addEventListener("DOMContentLoaded", function () {
   const submitButton = document.querySelector("input[type='submit']");
   const inputFields = form.querySelectorAll("input, textarea");
@@ -14,13 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!input.validity.valid) {
         isValid = false;
       }
-      // For email field
     });
 
     submitButton.disabled = !isValid;
   }
 });
-
+// Submit the form data via Fetch API
 document
   .getElementsByTagName("form")[0]
   .addEventListener("submit", function (event) {
