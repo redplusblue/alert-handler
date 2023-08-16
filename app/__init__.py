@@ -20,8 +20,6 @@ def contact():
 @app.route('/submit', methods=['POST'])
 def submit_alert():
     
-    return jsonify({'status': 'success'})
-    
     # Get form data
     name = str(request.form.get('name'))
     subject = str(request.form.get('subject'))
